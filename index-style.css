@@ -1,0 +1,63 @@
+main {
+	width: 875px;
+}
+button {
+	width: 100px;
+	height: 100px;
+	font-size: 25px;
+	position: absolute;
+	left: 350px;
+	top: 75px;
+	border-radius: 50px;
+	background: red;
+	cursor: pointer;
+}
+#number {
+	width: 200px;
+	height: 200px;
+	margin: auto;
+}
+#number *{
+	float: left;
+	font-size: 30px;
+	font-family: serif;
+}
+#number div{
+	width: 25px;
+	border-radius: 5px;
+	text-align: center;
+}
+#number input{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+#line {
+	width: 875px;
+	height: 83px;
+	background: blue;
+	background: url('images/sprite.png');
+}
+#line *{
+	font-size: 15px;
+	font-family: serif;
+	text-align: center;
+}
+#line input{
+	width: 15px;
+	height: 15px;
+	display: none;
+	position: relative;
+}
+#arc1{
+	float: left;
+	position: relative;
+	left: 35px;
+	bottom: 55px;
+}
+#arc2{
+	float: left;
+	position: relative;
+	left: 36px;
+	bottom: 30px;
+}

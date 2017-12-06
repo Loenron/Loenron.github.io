@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel="stylesheet" href="index-style.css">
+</head>
+<body>
+<main>
+<div id="number">
+	<div id="aCall"></div>
+	<div>+</div>
+	<div id="bCall"></div>
+	<div>=</div>
+	<div id="sumCall">?</div>
+</div>
+<button onclick="initiation(this)">Начать!</button>
+<div id="line">
+	<div id="arc1">
+		<div style="height:25px"><input id="inp2" onchange="checkInp(this, aVal)"></div>
+		<canvas id='example1'></canvas>
+	</div>
+	<div id="arc2">
+		<div style="height:25px"><input id="inp3" onchange="checkInp(this, bVal)"></div>
+		<canvas id='example2'></canvas>
+	</div>
+</div>
+<div></div>
+</main>
+</body>
+<script>
+/*Получение начальных цифр, заданных случайно в выбранном диапазоне*/
+function getRandom(min, max)
+{
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+var aVal = getRandom(6, 9);
+var sum = getRandom(11, 14);
+var bVal = sum - aVal;
+
+/*Инициализация ячеек*/
+var aCall = document.getElementById("aCall");
+var bCall = document.getElementById("bCall");
+var sumCall = document.getElementById("sumCall");
+var inp2 = document.getElementById("inp2");
+var inp3 = document.getElementById("inp3");
+aCall.innerHTML = aVal;
+bCall.innerHTML = bVal;
+
+/*Сценарий 1*/
+function drawStage1(){
+	var arrWidth = aVal * 39;//Вычисление
+	inp2.style.display = "block"; //Размещение input
+	inp2.style.left = arrWidth/2 - 9 + "px"; //Размещение input
+	var example = document.getElementById("example1"),//Отрисовка
+	ctx = example.getContext('2d');
+	example.height = 50;
+	example.width  = arrWidth;
+	ctx.beginPath();
+	ctx.moveTo(0, 50);
+	ctx.quadraticCurveTo(example.width/2, -49, example.width, 50);
+	ctx.lineTo(example.width-example.width/30, 40);
+	ctx.moveTo(example.width, 50);
+	ctx.lineTo(example.width-example.width/22, 46);
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = "#c86191";  
+	ctx.stroke();
+}
+
+/*Сценарий 2*/
+function drawStage2(){
+	var arrWidth = bVal * 39;//Вычисление ширины
+	inp3.style.display = "block"; //Размещение input
+	inp3.style.left = arrWidth/2 - 9 + "px"; //Размещение input
+	var example = document.getElementById("example2"),//Отрисовка
+	ctx = example.getContext('2d');
+	example.height = 25;
+	example.width  = arrWidth;
+	ctx.beginPath();
+	ctx.moveTo(0, 25);
+	ctx.quadraticCurveTo(example.width/2, -24, example.width, 25);
+	ctx.lineTo(example.width-example.width/22, 18);
+	ctx.moveTo(example.width, 25);
+	ctx.lineTo(example.width-example.width/16, 22);
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = "#c86191";  
+	ctx.stroke();
+}
+
+/*Инициация*/
+function initiation(button) {
+	button.style.display = "none";
+	drawStage1();
+}
+function checkInp(event, value){
+	if(event.value == value){
+		event.parentNode.innerHTML = value;
+		hideError(event);
+		if(event.id == "inp2"){drawStage2();}
+		if(event.id == "inp3"){sumCall.innerHTML = "<input id='inp1' onchange='checkInp(this, sum)'>"}/*Сценарий 3*/
+	}
+	else{
+		showError(event);
+	}
+}
+function showError(event){
+	event.style.color = "red";
+	if(event.id == "inp2"){aCall.style.background = "#faa745"};
+	if(event.id == "inp3"){bCall.style.background = "#faa745"};
+}
+function hideError(event){
+	if(event.id == "inp2"){aCall.style.background = ""};
+	if(event.id == "inp3"){bCall.style.background = ""};
+}
+</script>
+</html>
